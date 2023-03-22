@@ -71,6 +71,57 @@ cursor = todos.find({"due_date": {"$lt": d}}).sort("status")
 # result = todos.delete_one({"_id": ObjectId("641ab78c44ed5a53ba044b49")})
 # print(result.acknowledged)
 
-result = todos.update_one({"tags": "coding"}, {"$set": {"status": "done"}})
+new_values = {
+    "$set": {   # if field is not exists, it will be created
+        "status": "done"
+    },
+    "$inc": {       # Increment value
+        "age": 2,
+        "total_sth": 2
+    },
+    "$rename": {        # RENAME FIELD
+        "status": "is_running",
+        "haha": "HAHA"
+    },
+    "$unset": {        # Remove FIELD
+        "hihi": "anything_here_doesnt_matter",
+    }
+}
+result = todos.update_one({"tags": "coding"}, new_values)
 print(result.acknowledged)
 
+
+
+def get_age_range(min_age, max_age):
+    query = {
+        "$and": [
+            {"age": {"$gte": min_age}},
+            {"age": {"$lte": max_age}},
+        ]
+    }
+    cursor = todos.find(query).sort("age")
+
+def get_specific_columns():
+    cols = {"_id": 0, "name": 1}
+    # except the '_id' field, which field is not in the dict wont be returned
+    cursor = todos.find({}, cols)
+    print(list(cursor))
+
+
+def replace_doc(id):
+    '''
+        Replace the entire document without changing the id
+    '''
+    _id = ObjectId(id)
+
+    new_doc = {
+        'new': 'foooking',
+        'doc': 'mate'
+    }
+    result = todos.replace_one({'_id': _id}, new_doc)
+    
+def relationship_with_embedded_doc(person_id, address):
+    _id = ObjectId(person_id)
+
+    result = todos.update_one({'_id': _id}, {'$addToSet': {'addresses': address}})
+    # addToSet will treat the addresses field as a list, and add the new address to it
