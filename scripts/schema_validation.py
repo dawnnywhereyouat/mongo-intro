@@ -94,7 +94,7 @@ if __name__ == "__main__":
     ]
 
     insterted_ids = authors_collection.insert_many(author_lists).inserted_ids
-    insterted_ids = [1, 2]
+    # insterted_ids = [1, 2]
 
     books = [
         {
