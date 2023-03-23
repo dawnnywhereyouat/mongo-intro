@@ -17,4 +17,4 @@ if __name__ == "__main__":
         _id = ObjectId(person_id)
 
         result = todos_collection.update_one({"_id": _id}, {"$addToSet": {"addresses": address}})
-        # addToSet will treat the addresses field as a list, and add the new address to it
+        # addToSet will treat the addresses field as a list, and add the new address to it 
