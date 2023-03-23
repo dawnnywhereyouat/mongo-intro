@@ -2,10 +2,7 @@
 Mongo Client
 """
 
-import datetime
-
 import pymongo
-from bson.objectid import ObjectId
 
 
 class MongoClient:

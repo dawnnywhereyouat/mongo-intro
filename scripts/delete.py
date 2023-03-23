@@ -1,10 +1,8 @@
 """
     Eg delete operations
 """
-import datetime
 
 from bson import ObjectId
-
 from mongo_client import MongoClient
 
 if __name__ == "__main__":
