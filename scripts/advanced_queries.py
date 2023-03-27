@@ -45,7 +45,14 @@ if __name__ == "__main__":
                     }
                 }
             },
-            {"$project": {"first_name": 1, "last_name": 1, "total_books": 1, "_id": 0}},
+            {
+                "$project": {
+                    "first_name": 1,
+                    "last_name": 1,
+                    "total_books": 1,
+                    "_id": 0,
+                }
+            },  # what fields will be returned
         ]
     )
     # pprint.pprint(list(author_books_count))
